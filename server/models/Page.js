@@ -2,15 +2,17 @@ const { Schema, model } = require('mongoose');
 
 const pageSchema = new Schema(
   {
-    pageCount: {
-      type: Number,
-      required: true,
-    },
     content: {
       type: String,
       required: true,
     },
+    isPlain: {
+      type: Boolean,
+      default: false,
+    },
   }
 )
 
-module.exports = pageSchema
+const Page = model('Page', pageSchema);
+
+module.exports = Page

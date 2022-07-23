@@ -1,10 +1,9 @@
 const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 const defaultCover = require('../utils/defaultCover');
-const pageSchema = require("./Page")
 
 
-const journalSchema =  new Schema(
+const journalSchema = new Schema(
   {
     authorName: {
       type: String,
@@ -18,7 +17,12 @@ const journalSchema =  new Schema(
     desc: {
       type: String
     },
-    pages: [pageSchema],
+    pages: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Page',
+      }
+    ],
     createdAt: {
       type: Date,
       default: Date.now,
@@ -28,6 +32,9 @@ const journalSchema =  new Schema(
       type: Boolean,
       default: false,
     },
+    nextEditable: {
+      type: Date,
+    },
     isPublic: {
       type: Boolean,
       default: true,
@@ -36,6 +43,11 @@ const journalSchema =  new Schema(
       type: String,
       default: defaultCover(this.journalName, this.authorName)
     },
+    template: {
+      type: Schema.Types.ObjectId,
+      ref: 'Template',
+      // default: randomTemplate(),
+    }
   },
   {
     toJSON: {
@@ -43,6 +55,7 @@ const journalSchema =  new Schema(
     },
   }
 )
+
 
 journalSchema.virtual('pageCount').get(function () {
   return this.pages.length;
