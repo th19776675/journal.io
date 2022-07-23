@@ -12,8 +12,11 @@ const journalSchema =  new Schema(
     },
     journalName: {
       type: String,
-      max_length: 50,
+      max_length: 20,
       required: true,
+    },
+    desc: {
+      type: String
     },
     pages: [pageSchema],
     createdAt: {
@@ -23,7 +26,7 @@ const journalSchema =  new Schema(
     },
     isDaily: {
       type: Boolean,
-      required: true,
+      default: false,
     },
     isPublic: {
       type: Boolean,
@@ -32,7 +35,7 @@ const journalSchema =  new Schema(
     coverImage: {
       type: String,
       default: defaultCover(this.journalName, this.authorName)
-    }
+    },
   },
   {
     toJSON: {

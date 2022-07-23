@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+const defaultPfp = require("../utils/defaultPfp")
 
 const userSchema = new Schema(
   {
@@ -18,6 +19,10 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: true,
+    },
+    pfp: {
+      type: String,
+      default: defaultPfp(),
     },
     journals: [
       {
