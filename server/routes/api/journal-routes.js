@@ -2,18 +2,26 @@ const router = require('express').Router();
 
 const {
     createJournal,
-    updateJournal
+    getAllJournals, 
+    getJournal,
+    updateJournal,
+    deleteJournal,
+    createPage,
+    getPage,
+    addPage,
 } = require('../../controllers/journal-controller');
 
 const { authMiddleware } = require('../../utils/auth');
 
-router.route('/').post(createJournal);
+router.route('/').post(authMiddleware, createJournal).get(getAllJournals);
 
 router.route('/:journalId').get(authMiddleware, getJournal).put(authMiddleware, updateJournal).delete(authMiddleware, deleteJournal);
 
-router.route('/page').post(authMiddleware, addPage)
+router.route('/:journalId/page').post(authMiddleware, createPage)
 
-router.route('/page/:pageId').get(authMiddleware, getPage);
+router.route('/page/:pageId').get(getPage).post(authMiddleware, addPage);
+
+module.exports = router;
 
 
 

@@ -32,16 +32,13 @@ const journalSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    nextEditable: {
-      type: Date,
+    isEditable: {
+      type: Boolean,
+      default: true,
     },
     isPublic: {
       type: Boolean,
       default: true,
-    },
-    coverImage: {
-      type: String,
-      default: defaultCover(this.journalName, this.authorName)
     },
     template: {
       type: Schema.Types.ObjectId,
@@ -56,10 +53,13 @@ const journalSchema = new Schema(
   }
 )
 
-
 journalSchema.virtual('pageCount').get(function () {
   return this.pages.length;
 });
+
+journalSchema.virtual('coverImage').get(function () {
+  return defaultCover(this.authorName, this.journalName);
+})
 
 const Journal = model('Journal', journalSchema);
 

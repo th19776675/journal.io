@@ -2,8 +2,8 @@ const router = require('express').Router();
 const userRoutes = require('./user-routes');
 const journalRoutes = require('./journal-routes');
 
-router.use('/users', userRoutes);
-router.use('/journals', journalRoutes);
-// router.use('/templates', templateRoutes);
+router.use('/user', userRoutes);
+router.use('/journal', journalRoutes);
+// router.use('/template', templateRoutes);
 
 module.exports = router;
