@@ -1,0 +1,28 @@
+.leader-outer-wrapper {
+  max-width: 100%;
+  padding: 0;
+  overflow-x: hidden;
+  position: relative;
+  padding: 5px 0;
+}
+
+.leader-inner-wrapper > * {
+  display: inline;
+  background-color: white;
+  z-index: 3;
+}
+
+.leader-inner-wrapper:before {
+  width: 0;
+  white-space: nowrap;
+  position: absolute;
+  content:
+  ". . . . . . . . . . . . . . . . . . . . "
+  ". . . . . . . . . . . . . . . . . . . . "
+  ". . . . . . . . . . . . . . . . . . . . ";
+}
+
+.leader-inner-wrapper {
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,0 +1,18 @@
+.profile-container {
+    width: 41px;
+    height: 41px;
+    /* border: 1.5px solid black; */
+    border-radius: 50px;
+    overflow: hidden;
+    /* transition: all 0.5s ease-in-out; */
+}
+
+.profile-container:hover {
+    opacity: 0.75;
+    border: 1.5px solid black;
+}
+
+.profile-container img {
+    max-width: 100%;
+    max-height: 100%; 
+}

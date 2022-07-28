@@ -1,24 +1,15 @@
 import React, { useState, useEffect } from 'react'; 
 import Auth from '../../utils/auth';
+import './header.css'
+import Logo from './Logo'
+import ProfilePicture from "./ProfilePicture"
 
 const Header = () => {
   return (
     <>
-      <header>
-        <div className="header-logo">
-          <img src="./img/site-logo.jpg" alt="Journ.al Logo" className='header-img'/>
-        </div>
-        <nav>
-          <div className="nav-item">
-            {/* <NewBtn /> */}
-          </div>
-          <div className="nav-item">
-            {/* <LoginBtn /> */}
-          </div>
-          <div className="nav-item">
-            {/* <ProfileIcon /> */}
-          </div>
-        </nav>
+      <header className='header-wrapper'>
+        <Logo />
+        <ProfilePicture />
       </header>
     </>
   )

@@ -1,0 +1,48 @@
+.login-form-wrapper {
+  width: 300px;
+  margin: 0 10px;
+}
+
+.login-form {
+  width: 100%;
+  text-align: center;
+}
+
+.login-form input {
+  width: 100%;
+  border: 1.5px solid black;
+  border-radius: 0;
+  padding: 5px;
+}
+
+.login-form > * {
+  margin: 5px 0;
+}
+
+.login-form input:focus {
+  outline: 1px solid black;
+  
+}
+
+.login-form button {
+  border: 1.5px solid black;
+  padding: 5px 10px;
+  background: white;
+  transition: all 0.5s ease-out;
+}
+
+.login-form button:hover {
+  background: black;
+  color: white;
+}
+
+.error-text {
+  font-size: 90%;
+  color: rgb(141, 99, 99);
+}
+
+.signup-file {
+  border: 0px !important;
+}
+
+

@@ -1,50 +1,38 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
+import "./app.css";
 import Header from './components/Header/Header';
+import Login from './pages/Login';
+import Auth from "./utils/auth";
+import { CurrentUserProvider } from "./utils/CurrentUserContext"
 
-function App() {
+const App = () => {
+  // const [selectedData, setData] = useState(getDaily())
+  if (!Auth.loggedIn()) {
+    return(
+      <>
+        <Login />
+      </>
+    )
+  }
+
   return (
     <Router>
-      <>
-        <Header />
-        <main>
-        {/* <Routes>
-          <Route 
-            path='/' 
-            element={<Home />} 
-          />
-          <Route 
-            path='/journals' 
-            element={<Journals />} 
-          />
-          <Route 
-            path='/create' 
-            element={<CreateJournal />} 
-          />
-          <Route 
-            path='/pages' 
-            element={<Pages />} 
-          />
-          <Route 
-            path='/login' 
-            element={<Login />} 
-          />
-          <Route 
-            path='/:userId'
-            element={<UserProfile />}
-          />
-          <Route 
-            path='/journal/:journalId'
-            element={<Journal />}
-          />
-          <Route 
-            path='/write'
-            element={<Page />}
-          />
-        </Routes> */}
+      <CurrentUserProvider>
+        <main className='app-main'>
+          <Header />
+          {/* <Nav />
+          <Display /> */}
         </main>
-      </>
+        <aside className='app-aside'>
+          {/* <Routes>
+            <Route 
+              path='/' 
+              element={<Home />} 
+            />
+          </Routes> */}
+        </aside>
+      </CurrentUserProvider>
     </Router>
   );
 }

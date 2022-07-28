@@ -1,0 +1,14 @@
+.login-main {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}

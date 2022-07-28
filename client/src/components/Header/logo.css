@@ -1,0 +1,26 @@
+.logo-container {
+    border: 1.5px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    padding: 10px 15px;
+    border-radius: 100px;
+    transition: all 0.5s ease-out;
+    font-size: 18px;
+}
+
+.logo-container:hover {
+    background: black;
+    color: white;
+}
+
+.logo-container h1 {
+    display: inline;
+    margin: 0 2.5px;
+}
+
+.logo-right {
+    font-style: italic;
+}
+
