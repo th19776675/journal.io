@@ -33,20 +33,20 @@ const SignupCard = () => {
       if (target.files) {
         let imageFile = target.files[0];
         console.log(imageFile)
-        var reader = new FileReader();
+        const reader = new FileReader();
         reader.onload = function (e) {
-          var img = new Image;
+          const img = new Image;
           img.onload = function (event) {
             // Dynamically create a canvas element
             console.log("Test")
-                var canvas = createCanvas();
-                // var canvas = document.getElementById("canvas");
-                var ctx = canvas.getContext("2d");
-                var MAX_WIDTH = 100;
-                var MAX_HEIGHT = 100;
+                const canvas = createCanvas();
+                // const canvas = document.getElementById("canvas");
+                const ctx = canvas.getContext("2d");
+                const MAX_WIDTH = 100;
+                const MAX_HEIGHT = 100;
                 
-                var width = img.width;
-                var height = img.height;
+                let width = img.width;
+                let height = img.height;
                 
                 // Change the resizing logic
                 if (width > height) {
@@ -63,11 +63,10 @@ const SignupCard = () => {
                 
                 canvas.width = width;
                 canvas.height = height;
-                var ctx = canvas.getContext("2d");
                 ctx.drawImage(img, 0, 0, width, height);
 
-                // Show resized image in preview element
-                var dataurl = canvas.toDataURL(imageFile.type);
+                const dataurl = canvas.toDataURL(imageFile.type);
+                console.log(dataurl)
                 setPfpSrc(dataurl)
               }
             img.src = e.target.result;
