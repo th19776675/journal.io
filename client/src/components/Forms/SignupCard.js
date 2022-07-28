@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import './login-card.css'
-import Leader from "../Leader/Leader"
+import Leader from "../Leader"
 import { createCanvas } from "canvas"
 
-import { loginUser } from "../../utils/API";
+import { createUser } from "../../utils/API";
 import Auth from "../../utils/auth";
 
-import { validateEmail  } from '../../utils/helpers';
+import { validateEmail, checkPassword  } from '../../utils/helpers';
 
 const SignupCard = () => {
 
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [pfpInput, setPfpInput] = useState('');
   const [pfp, setPfp] = useState('');
-  const [pfpSrc, setPfpSrc] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleInputChange = (e) => {
@@ -22,14 +22,14 @@ const SignupCard = () => {
     const inputType = target.name;
     const inputValue = target.value;
 
-    if (inputType === 'user') {
-      setUser(inputValue);
+    if (inputType === 'username') {
+      setUsername(inputValue);
     } else if (inputType === 'password'){
       setPassword(inputValue);
     } else if (inputType === 'email'){
       setEmail(inputValue);
     } else {
-      setPfp(inputValue);
+      setPfpInput(inputValue);
       if (target.files) {
         let imageFile = target.files[0];
         console.log(imageFile)
@@ -67,7 +67,7 @@ const SignupCard = () => {
 
                 const dataurl = canvas.toDataURL(imageFile.type);
                 console.log(dataurl)
-                setPfpSrc(dataurl)
+                setPfp(dataurl)
               }
             img.src = e.target.result;
         }
@@ -87,8 +87,6 @@ const SignupCard = () => {
         password
       }
     } else {
-
-      
       formData = {
         username,
         email,
@@ -98,20 +96,32 @@ const SignupCard = () => {
     }
 
     try {
-      const response = await loginUser(formData);
+      if (!username) {
+        throw new Error("Enter a valid username!");
+      }
+      if (!validateEmail(email)) {
+        throw new Error("Enter a valid email!");
+      }
+      if (!checkPassword(password)) {
+        throw new Error("Enter a valid password!");
+      }
+      const response = await createUser(formData);
       if (!response.ok) {
         const { message } = await response.json();
         throw new Error(message);
       }
       console.log(response)
-      const { token, user } = await response.json();
+      const { token } = await response.json();
       Auth.login(token);
     } catch (e) {
       setErrorMessage(`${e}`)
     }
 
-    setUser('');
+    setUsername('');
     setPassword('');
+    setPfp('');
+    setPfpInput("");
+    setEmail("");
   };
 
   return (
@@ -143,22 +153,30 @@ const SignupCard = () => {
           onChange={handleInputChange}
           placeholder="Password"
         />
-        <input
-          value={pfp}
-          
-          accept="image/*"
-          className='signup-file'
-          name="pfp"
-          type="file"
-          onChange={handleInputChange}
-          placeholder="Password"
-        />
+        <div>
+        <div className="image-wrapper">
+          <input
+            value={pfpInput}
+            
+            accept="image/*"
+            className='signup-file'
+            name="pfp"
+            type="file"
+            onChange={handleInputChange}
+            placeholder="Password"
+          />
+          <div className="form-img">
+            <img src={pfp ? pfp : ""} />
+          </div>
+        </div>
+
+        </div>
         {errorMessage && (
           <div>
             <p className="error-text">{errorMessage}</p>
           </div>
         )}
-        <button type="button" onClick={handleFormSubmit}>Submit</button>
+        <button type="submit" onClick={handleFormSubmit}>Signup</button>
         </form>
       </div>
     </>

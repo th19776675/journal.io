@@ -1,6 +1,9 @@
 .app-main {
     width: 40%;
-    padding: 25px;
+    padding: 50px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .app-aside {

@@ -1,0 +1,8 @@
+.display-wrapper {
+  width: 100%;
+  height: auto;
+  border: 1.5px solid black;
+  flex-grow: 1;
+  margin-top: 25px;
+  padding: 5px;
+}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'; 
-import Logo from '../components/Header/Logo'
-import LoginCard from "../components/Forms/LoginCard"
-import SignupCard from "../components/Forms/SignupCard"
+import Logo from '../../components/Header/Logo'
+import LoginCard from "../../components/Forms/LoginCard"
+import SignupCard from "../../components/Forms/SignupCard"
 import './login.css';
 
 const Login = () => {

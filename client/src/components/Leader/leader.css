@@ -10,6 +10,12 @@
   display: inline;
   background-color: white;
   z-index: 3;
+  padding-left: 5px;
+}
+
+.leader-inner-wrapper > *:first-child {
+  padding-right: 5px;
+  padding-left: 0;
 }
 
 .leader-inner-wrapper:before {

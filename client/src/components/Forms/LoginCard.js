@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './login-card.css'
-import Leader from "../Leader/Leader"
+import Leader from "../Leader"
 
 import { loginUser } from "../../utils/API";
 import Auth from "../../utils/auth";
@@ -83,7 +83,7 @@ const LoginCard = (props) => {
             <p className="error-text">{errorMessage}</p>
           </div>
         )}
-        <button type="button" onClick={handleFormSubmit}>Submit</button>
+        <button type="submit" onClick={handleFormSubmit}>Login</button>
         </form>
       </div>
     </>

@@ -5,11 +5,11 @@
     border-radius: 50px;
     overflow: hidden;
     /* transition: all 0.5s ease-in-out; */
+    outline: 1.5px solid black;
 }
 
 .profile-container:hover {
     opacity: 0.75;
-    border: 1.5px solid black;
 }
 
 .profile-container img {
