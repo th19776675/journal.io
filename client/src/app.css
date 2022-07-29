@@ -8,4 +8,13 @@
 
 .app-aside {
     width: 60%;
+    padding-left: 50px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.app-wrapper {
+    display: flex;
 }

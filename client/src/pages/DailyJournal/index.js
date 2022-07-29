@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Auth from "../../utils/auth";
 import Leader from "../../components/Leader"
+import Button from "../../components/Button";
 import "./daily-journal.css"
 import { getDaily, postPlainDaily } from "../../utils/API";
 import TextEditor from "../../components/TextEditor";

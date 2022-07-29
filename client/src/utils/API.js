@@ -29,7 +29,7 @@ export const getDaily = (token) => {
 }
 
 export const postPlainDaily = (token, content, isPlain, isDaily, journalId) => {
-  return fetch (`api/journal/${journalId}/page`, {
+  return fetch (`/api/journal/${journalId}/page`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -37,4 +37,15 @@ export const postPlainDaily = (token, content, isPlain, isDaily, journalId) => {
     },
     body: JSON.stringify({ content, isPlain, isDaily })
   });
+}
+
+export const updateUser = (token, userData) => {
+  return fetch ("/api/user", {
+    method: "PUT",
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(userData)
+  })
 }

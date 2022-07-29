@@ -1,20 +1,25 @@
 import React, { useState } from 'react';
-import './login-card.css'
-import Leader from "../Leader"
+import './profile-update.css'
+import Leader from '../../components/Leader';
 import { createCanvas } from "canvas"
+import { Link } from 'react-router-dom';
 
-import { createUser } from "../../utils/API";
+import { updateUser } from "../../utils/API";
 import Auth from "../../utils/auth";
 
 import { validateEmail, checkPassword  } from '../../utils/helpers';
+import { useCurrentUser } from "../../utils/CurrentUserContext";
 
-const SignupCard = () => {
 
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
+const ProfileUpdate = () => {
+
+  const { currentUser, fetchCurrentUser } = useCurrentUser()
+
+  const [username, setUsername] = useState(currentUser ? currentUser.username: "");
+  const [email, setEmail] = useState(currentUser ? currentUser.email: "");
   const [password, setPassword] = useState('');
   const [pfpInput, setPfpInput] = useState('');
-  const [pfp, setPfp] = useState('');
+  const [pfp, setPfp] = useState(currentUser ? currentUser.pfp: "");
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleInputChange = (e) => {
@@ -78,42 +83,38 @@ const SignupCard = () => {
   };
 
   const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    let formData;
-
-    if (!pfp) {
-      formData = {
-        username,
-        email,
-        password
-      }
-    } else {
-      formData = {
-        username,
-        email,
-        password,
-        pfp
-      }
+    let formData = {};
+    if (username) {
+      formData.username = username;
     }
+    if (email) {
+      formData.email = email;
+    }
+    if (password) {
+      formData.password = password;
+    }
+    if (pfp) {
+      formData.pfp = pfp;
+    }
+    
 
     try {
-      if (!username) {
-        throw new Error("Enter a valid username!");
-      }
-      if (!validateEmail(email)) {
+      if (email && !validateEmail(email)) {
         throw new Error("Enter a valid email!");
       }
-      if (!checkPassword(password)) {
+      if (password && !checkPassword(password)) {
         throw new Error("Enter a valid password!");
       }
-      const response = await createUser(formData);
+      if(!formData) {
+        throw new Error("You need to update something!");
+      }
+      const token = Auth.getToken()
+      const response = await updateUser(token, formData);
       if (!response.ok) {
         const { message } = await response.json();
         throw new Error(message);
       }
-      console.log(response)
-      const { token } = await response.json();
-      Auth.login(token);
+      fetchCurrentUser()
     } catch (e) {
       setErrorMessage(`${e}`)
     }
@@ -126,33 +127,33 @@ const SignupCard = () => {
   };
 
   return (
-    <>
-      <div className="login-form-wrapper">
-        <form className='login-form'>
+    <div className="update-outer-wrapper">
+      <div className="update-form-wrapper">
+        <form className='update-form'>
           <Leader>
-            <h3>Signup</h3>
-            <h3>2</h3>
+            <h3>Update</h3>
+            <h3>0</h3>
           </Leader>
         <input
           value={username}
           name="username"
           type="text"
           onChange={handleInputChange}
-          placeholder="Username"
+          placeholder={`Current Username : ${currentUser ? currentUser.username: ""}`}
         />
         <input
           value={email}
           name="email"
           type="email"
           onChange={handleInputChange}
-          placeholder="Email"
+          placeholder={`Current Email : ${currentUser ? currentUser.email: ""}`}
         />
         <input
           value={password}
           name="password"
           type="password"
           onChange={handleInputChange}
-          placeholder="Password"
+          placeholder="Choose a password!"
         />
         <div>
         <div className="image-wrapper">
@@ -177,11 +178,13 @@ const SignupCard = () => {
             <p className="error-text">{errorMessage}</p>
           </div>
         )}
-        <button type="submit" onClick={handleFormSubmit}>Signup</button>
+        <Link to="/profile">
+        <button type="submit" onClick={handleFormSubmit}>Update</button>
+        </Link>
         </form>
       </div>
-    </>
+    </div>
   )
 }
 
-export default SignupCard;
+export default ProfileUpdate;

@@ -6,7 +6,7 @@ const Toggle = ({checked, onClick}) => {
     <input 
       type="checkbox" 
       checked={checked}
-      onClick={onClick}
+      onChange={onClick}
     />
     <span className="toggle-slider"></span>
     </label>

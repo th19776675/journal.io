@@ -15,7 +15,7 @@ const Nav = () => {
               <p>1</p>
             </Leader>
           </Link>
-          <Link to="" className="nav-links">
+          <Link to="daily" className="nav-links">
             <Leader>
               <p>My Daily Journal</p>
               <p>2</p>

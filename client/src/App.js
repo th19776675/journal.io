@@ -4,6 +4,9 @@ import "./app.css";
 import Header from './components/Header';
 import Nav from './components/Nav';
 import Display from './components/Display';
+
+import DailyAside from './pages/DailyAside';
+
 import Login from './pages/Login';
 import Auth from "./utils/auth";
 import { CurrentUserProvider } from "./utils/CurrentUserContext"
@@ -20,19 +23,25 @@ const App = () => {
   return (
     <Router>
       <CurrentUserProvider>
-        <main className='app-main'>
-          <Header />
-          <Nav />
-          <Display />
-        </main>
-        <aside className='app-aside'>
-          {/* <Routes>
-            <Route 
-              path='/' 
-              element={<Home />} 
-            />
-          </Routes> */}
-        </aside>
+        <div className="app-wrapper">
+          <main className='app-main'>
+            <Header />
+            <Nav />
+            <Display />
+          </main>
+          <aside className='app-aside'>
+            <Routes>
+              {/* <Route 
+                path='/' 
+                element={<Home />} 
+              /> */}
+              <Route
+                path="/daily"
+                element={<DailyAside />}
+              />
+            </Routes>
+          </aside>
+        </div>
       </CurrentUserProvider>
     </Router>
   );
