@@ -62,6 +62,14 @@ module.exports = {
         }
         res.json(journal);
     },
+    async getDailyJournal ({user, params}, res) {
+        const dailyJournal = await Journal.findOne({authorName: user.username, isDaily: true}
+        )
+        if (!dailyJournal) {
+            return res.status(400).json({ message: 'This journal could not be found!' });
+        }
+        res.json(dailyJournal);
+    },
     async updateJournal ({body, params}, res) {
         const updatedJournal = await Journal.findOneAndUpdate(
             { _id: params.journalId },
@@ -89,8 +97,8 @@ module.exports = {
         res.json({ deletedJournal, updatedUser })
     },
     async createPage ({headers, body, params}, res) {
-
-        const newPage = await Page.create(body);
+        const {content, isPlain, isDaily} = body
+        const newPage = await Page.create({content, isPlain});
         if (!newPage) {
             return res.status(400).json({ message: 'Page could not be created!' });
         };
@@ -102,7 +110,7 @@ module.exports = {
         if (!updatedJournal) {
             return res.status(400).json({ message: 'Page could not be added to journal!' });
         };
-        if (headers.isDaily === true) {
+        if (isDaily === true) {
             updatedJournal = await Journal.findOneAndUpdate(
                 {_id: params.journalId},
                 {$set: {isEditable: false}},

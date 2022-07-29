@@ -69,6 +69,7 @@ const SignupCard = () => {
                 console.log(dataurl)
                 setPfp(dataurl)
               }
+              console.log(e.target.result)
             img.src = e.target.result;
         }
         reader.readAsDataURL(imageFile);

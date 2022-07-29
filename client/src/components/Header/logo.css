@@ -8,6 +8,7 @@
     border-radius: 100px;
     transition: all 0.5s ease-out;
     font-size: 18px;
+    box-shadow: black 5px 5px 0;
 }
 
 .logo-container:hover {

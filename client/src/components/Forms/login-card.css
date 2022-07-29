@@ -21,7 +21,6 @@
 
 .login-form input:focus {
   outline: 1px solid black;
-  
 }
 
 .login-form button {

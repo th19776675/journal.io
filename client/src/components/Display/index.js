@@ -4,6 +4,7 @@ import Auth from "../../utils/auth";
 import Leader from "../Leader"
 import "./display.css"
 import DailyJournal from "../../pages/DailyJournal";
+import Profile from "../../pages/Profile";
 
 const Display = () => {
   return (
@@ -13,10 +14,10 @@ const Display = () => {
           path='/' 
           element={<DailyJournal />} 
         />
-        {/* <Route
+        <Route
           path='/profile' 
-          element={<ProfileJournal />} 
-        /> */}
+          element={<Profile />} 
+        />
 
 
 

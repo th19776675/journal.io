@@ -17,3 +17,24 @@ export const createUser = (userData) => {
     body: JSON.stringify(userData),
   });
 }
+
+export const getDaily = (token) => {
+  return fetch('/api/journal/daily', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    }
+    });
+}
+
+export const postPlainDaily = (token, content, isPlain, isDaily, journalId) => {
+  return fetch (`api/journal/${journalId}/page`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ content, isPlain, isDaily })
+  });
+}

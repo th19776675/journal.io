@@ -3,6 +3,7 @@ const router = require('express').Router();
 const {
     createJournal,
     getAllJournals, 
+    getDailyJournal,
     getJournal,
     updateJournal,
     deleteJournal,
@@ -14,6 +15,8 @@ const {
 const { authMiddleware } = require('../../utils/auth');
 
 router.route('/').post(authMiddleware, createJournal).get(getAllJournals);
+
+router.route("/daily").get(authMiddleware, getDailyJournal)
 
 router.route('/:journalId').get(authMiddleware, getJournal).put(authMiddleware, updateJournal).delete(authMiddleware, deleteJournal);
 

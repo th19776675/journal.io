@@ -1,0 +1,20 @@
+.daily-unavailable-wrapper {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(238, 238, 238);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.daily-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.daily-editor {
+  flex-grow: 1;
+}
+
+
