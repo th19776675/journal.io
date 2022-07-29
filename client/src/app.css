@@ -8,6 +8,7 @@
 
 .app-aside {
     width: 60%;
+    height: 100vh;
     padding-left: 50px;
     display: flex;
     flex-direction: column;
@@ -18,3 +19,28 @@
 .app-wrapper {
     display: flex;
 }
+
+@media only screen and (max-width: 1080px) {
+    .app-wrapper {
+        flex-direction:column ;
+    }
+    .app-main {
+        width: 100%
+    }
+    .app-aside {
+        width: 100%;
+    }
+  }
+
+@media only screen and (max-width: 600px) {
+    .app-aside {
+        padding-left: 20px;
+    }
+  }
+@media only screen and (max-width: 500px) {
+    .app-aside {
+        padding: 0 10px;
+    }
+  }
+
+  

@@ -1,0 +1,16 @@
+.home-wrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-box {
+  width: 300px;
+}
+
+.home-text {
+  line-height: 1.15;
+  padding: 5px;
+  text-align: center;
+}

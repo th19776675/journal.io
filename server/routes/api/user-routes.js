@@ -4,9 +4,12 @@ const {
     createUser,
     updateUser,
     getUser,
+    getUsername,
     getAllUsers,
     login,
-    addJournal
+    addJournal,
+    getJournalUser,
+    addFriend,
 } = require('../../controllers/user-controller');
 
 const { authMiddleware } = require('../../utils/auth');
@@ -15,9 +18,13 @@ router.route('/').post(createUser).get(getAllUsers).put(authMiddleware, updateUs
 
 router.route('/login').post(login);
 
-router.route('/journal/:journalId').put(addJournal);
+router.route('/journal/:journalId').put(addJournal).get(getJournalUser);
 
 router.route('/:userId').get(getUser);
+
+router.route('/add/:username').post(authMiddleware, addFriend)
+
+router.route('/username/:username').get(getUsername)
 
 module.exports = router;
 

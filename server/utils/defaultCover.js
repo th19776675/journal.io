@@ -60,10 +60,10 @@ module.exports = (
   const nameSize = genRan(15, 30)
   const journalSize = genRan(25, 40)
   
-  ctx.font = `${nameSize}px ${getFont()}`
-  ctx.fillText(username, getX(ctx, username, canSize), getY(nameSize, canSize));
   ctx.font = `${journalSize}px ${getFont()}`
   ctx.fillText(journalName, getX(ctx, journalName, canSize), getY(journalSize, canSize));
+  ctx.font = `${nameSize}px ${getFont()}`
+  ctx.fillText(username, getX(ctx, username, canSize), getY(nameSize, canSize));
   
   return canvas.toDataURL()  
 }

@@ -1,0 +1,9 @@
+.page-content {
+  padding: 5px;
+  margin: 5px;
+}
+
+.page-buttons {
+  display: flex;
+  justify-content: space-around;
+}

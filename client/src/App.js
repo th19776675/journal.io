@@ -6,6 +6,10 @@ import Nav from './components/Nav';
 import Display from './components/Display';
 
 import DailyAside from './pages/DailyAside';
+import JournalAside from './pages/JournalAside';
+import JournalUserAside from './pages/JournalUserAside';
+import AllJournalsAside from './pages/AllJournalsAside';
+import AllUsersAside from './pages/AllUsersAside';
 
 import Login from './pages/Login';
 import Auth from "./utils/auth";
@@ -38,6 +42,34 @@ const App = () => {
               <Route
                 path="/daily"
                 element={<DailyAside />}
+              />
+              <Route
+                path="/journal/:journalId/page/:pageId"
+                element={<JournalAside />}
+              />
+              <Route
+                path="/journal/:journalId"
+                element={<JournalAside />}
+              />
+              <Route
+                path="/journal/:journalId/publish"
+                element={<JournalAside />}
+              />
+              <Route
+                path="/journals/user"
+                element={<JournalUserAside />}
+              />
+              <Route
+                path="/journals/create"
+                element={<JournalUserAside />}
+              />
+              <Route
+                path="/journals"
+                element={<AllJournalsAside />}
+              />
+              <Route
+                path="/users"
+                element={<AllUsersAside />}
               />
             </Routes>
           </aside>

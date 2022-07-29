@@ -1,8 +1,8 @@
 import './button.css'
 
-const Button = ({onClick, children}) => {
+const Button = ({onClick, children, width}) => {
   return (
-    <button className="button-component" onClick={onClick}>{children}</button>
+    <button style={{ width: width }} className="button-component" onClick={onClick}>{children}</button>
   )
 }
 

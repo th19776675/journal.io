@@ -1,0 +1,15 @@
+.ausers-card-wrapper {
+  display: flex;
+}
+
+.ausers-img {
+  max-height: 100px;
+  border: 1px solid black;
+}
+
+.auser-info {
+  height: 100%;
+  width: 100%;
+  margin-left: 10px;
+  color: black;
+}

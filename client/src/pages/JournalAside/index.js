@@ -3,32 +3,39 @@ import Leader from "../../components/Leader"
 import Button from "../../components/Button"
 import { useState, useEffect } from "react"
 import Auth from "../../utils/auth"
-import { getDailyPages } from "../../utils/API"
-import "./daily-aside.css"
+import { getJournal } from "../../utils/API"
+import "./journal-aside.css"
 
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 
 
-const DailyAside = () => {
-  const [dailyJournalPages, setDailyJournalPages] = useState("")
+const JournalAside = () => {
+  const [journalPages, setJournalPages] = useState("")
+  const {journalId} = useParams()
 
-  const getDailyPageData = async () => {
+
+  const profileData = Auth.getProfile()
+  
+  const getPageData = async () => {
     const token = Auth.getToken()
     try {
-      const response = await getDailyPages(token)
-      console.log(response)
+      const response = await getJournal(token, journalId)
+      if (!response.ok) {
+        const { message } = await response.json();
+        throw new Error(message);      
+      }
       const data = await response.json()
-      setDailyJournalPages(data)
+      setJournalPages(data)
     } catch (e) {
-
+      console.log(e)
     }
   }
 
   useEffect(() => {
-    getDailyPageData()
+    getPageData()
   },[])
 
-  if (!dailyJournalPages) {
+  if (!journalPages) {
     return (
       <></>
     )
@@ -39,7 +46,7 @@ const DailyAside = () => {
       <AsideCard height="300px">
         <div className="daside-card-wrapper">
           <div className="daside-journal-cover">
-            <img src={dailyJournalPages.coverImage} alt="" className="daside-img" />
+            <img src={journalPages.coverImage} alt="" className="daside-img" />
           </div>
         </div>
       </AsideCard>
@@ -51,14 +58,14 @@ const DailyAside = () => {
           </Leader>
           <div className="daside-card-desc">
             <p>
-              A journal by me!
+              {journalPages.desc}
             </p>
           </div>
         </div>
       </AsideCard>
-      {dailyJournalPages.pages.map((page, index) => {
+      {journalPages.pages.map((page, index) => {
         return (
-          <AsideCard >
+          <AsideCard>
           <div className="daside-card-wrapper">
             <div className="daside-header">
               <Leader>
@@ -72,16 +79,23 @@ const DailyAside = () => {
                 {page.content}
               </p>
             </div>
-            <Link className="daside-button" to={`/journal/${dailyJournalPages._id}/page/${page._id}`}>
+            <Link className="daside-button" to={`/journal/${journalPages._id}/page/${page._id}`}>
               <Button width="100%">View Page</Button>
             </Link>
           </div>
         </AsideCard>
         )
       })}
+      {profileData.data.username === journalPages.authorName ? 
+        <AsideCard height="auto">
+         <Link to={`/journal/${journalPages._id}/publish`}><Button>Add Page</Button></Link> 
+        </AsideCard>:
+        ""
+    }
+
 
     </div>
   )
 }
 
-export default DailyAside
+export default JournalAside

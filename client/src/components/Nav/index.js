@@ -11,7 +11,7 @@ const Nav = () => {
         <div className="nav-link-container">
           <Link to="profile" className="nav-links">
             <Leader>
-              <p>Profile</p>
+              <p>My Profile</p>
               <p>1</p>
             </Leader>
           </Link>
@@ -21,7 +21,7 @@ const Nav = () => {
               <p>2</p>
             </Leader>
           </Link>
-          <Link to="journals" className="nav-links">
+          <Link to="journals/user" className="nav-links">
             <Leader>
               <p>My Journals</p>
               <p>3</p>
@@ -37,18 +37,18 @@ const Nav = () => {
                 <p>4</p>
               </Leader>
             </Link>
-            <Link to="journals" className="nav-links">
+            <Link to="users" className="nav-links">
               <Leader>
                 <p>User View</p>
                 <p>5</p>
               </Leader>
             </Link>
-            <Link to="journals" className="nav-links">
+            {/* <Link to="pages" className="nav-links">
               <Leader>
                 <p>Page View</p>
                 <p>6</p>
               </Leader>
-            </Link>  
+            </Link>   */}
         </div>
       </section>
     </nav>

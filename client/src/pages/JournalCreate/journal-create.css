@@ -1,0 +1,15 @@
+.jcreate-button.wrapper {
+  margin: 10px 0;
+}
+
+.jcreate-textarea {
+  width: 100%;
+  height: 200px;
+  resize: none;
+  border: 1.5px solid black;
+  border-radius: 0;
+}
+
+.jcreate-textarea:focus {
+  outline: 1px solid black;
+}

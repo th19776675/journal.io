@@ -14,13 +14,22 @@ module.exports = {
         }
         res.json(foundUser);
       },
+    async getUsername({ params }, res) {
+      // Find user based on id or username
+        const foundUser = await User.findOne({username: params.username }).populate("journals");
+    
+        if (!foundUser) {
+          return res.status(400).json({ message: 'Cannot find a user with this id!' });
+        }
+        res.json(foundUser);
+      },
     async getAllUsers(req, res){
       // Return all users, without journals populated.
         const allUsers = await User.find()
         if (!allUsers) {
             return res.status(400).json({ message: 'Cannot find a user with this id!' });
           }
-        res.json(allUsers);
+        res.json(allUsers.reverse());
     },
     async createUser({ body }, res) {
       // Creating a user
@@ -105,5 +114,30 @@ module.exports = {
         return res.status(400).json({ message: 'Journal was not added' });
       }
       return res.json(updatedUser)
+    },
+    async getJournalUser({params}, res) {
+      const user = await User.find(
+        {journals: params.journalId}
+      );
+      if (!user) {
+        return res.status(400).json({ message: 'Cannot find a user with this id!' });
+      }
+      res.json(user);
+    },
+    async addFriend({user, params}, res) {
+      const friend = await User.find({username: params.username});
+      if (!friend) {
+        return res.status(400).json({ message: 'Cannot find a user with this username!' });
+      }
+      console.log(friend)
+      const updatedUser = await User.findOneAndUpdate(
+        {_id: user._id},
+        {$addToSet: {friends: friend[0]._id}},
+        { runValidators: true, new: true }
+      )
+      if (!updatedUser) {
+        return res.status(400).json({ message: '1Could not update this user!' });
+      }
+      res.json({updatedUser});
     }
 }

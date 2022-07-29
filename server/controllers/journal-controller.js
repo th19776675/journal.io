@@ -50,7 +50,7 @@ module.exports = {
             return res.status(400).json({ message: 'There are no public Journals' });
         }
 
-        res.json( publicJournals )
+        res.json( publicJournals.reverse() )
     },
     async getJournal ({user, params}, res) {
         const journal = await Journal.findById(params.journalId).populate("pages")
@@ -62,9 +62,27 @@ module.exports = {
         }
         res.json(journal);
     },
-    async getDailyJournal ({user, params}, res) {
+    async getCleanJournal ({user, params}, res) {
+        const journal = await Journal.findById(params.journalId)
+        if (!journal) {
+            return res.status(400).json({ message: 'This journal could not be found!' });
+        }
+        if (journal.isPublic === false && journal.authorName !== user.username) {
+            return res.status(400).json({ message: 'This journal is private!' });
+        }
+        res.json(journal);
+    },
+    async getDailyJournal ({user}, res) {
         const dailyJournal = await Journal.findOne({authorName: user.username, isDaily: true}
         )
+        if (!dailyJournal) {
+            return res.status(400).json({ message: 'This journal could not be found!' });
+        }
+        res.json(dailyJournal);
+    },
+    async getDailyPages ({user}, res) {
+        const dailyJournal = await Journal.findOne({authorName: user.username, isDaily: true}
+        ).populate("pages")
         if (!dailyJournal) {
             return res.status(400).json({ message: 'This journal could not be found!' });
         }
@@ -125,6 +143,13 @@ module.exports = {
             return res.status(404).json({ message: 'Page could not be found!' });
         }
         res.json(page)
+    },
+    async getAllPages () {
+        const pages = await Page.find();
+        if (!pages) {
+            return res.status(404).json({ message: 'Page could not be found!' });
+        }
+        res.json(pages.reverse())
     },
     async addPage ({body, params}) {
         const checkPage = Page.findById(params.pageId);

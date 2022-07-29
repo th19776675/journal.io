@@ -52,7 +52,7 @@ const Profile = () => {
           </Leader>
           <Leader>
             <h3>Friends</h3>
-            <p>0</p>
+            <p>{currentUser ? currentUser.friends.length : ""}</p>
           </Leader>
         </div>
       </div>

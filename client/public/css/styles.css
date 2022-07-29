@@ -22,6 +22,7 @@
   time, mark, audio, video {
       margin: 0;
       padding: 0;
+      text-decoration: none;
       border: 0;
       font-size: 1em;
       font: inherit;
