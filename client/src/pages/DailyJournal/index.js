@@ -64,7 +64,7 @@ const DailyJournal = () => {
       }
       setDailyPlainText("")
       getDailyData()
-      lcoation.reload(0)
+      location.reload(0)
     } catch (e) {
       alert(e)
     }
