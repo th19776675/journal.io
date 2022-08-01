@@ -134,3 +134,24 @@ export const addFriend = (token, username) => {
     },
   })
 }
+
+export const deleteJournal = (token , journalId) => {
+  return fetch(`/api/journal/${journalId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+  })
+}
+
+export const addPage = (token, journalId, pageId) => {
+  return fetch(`/api/journal/page/${pageId}`, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ journalId })
+  })
+}

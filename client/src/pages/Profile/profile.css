@@ -26,8 +26,8 @@
 }
 
 .profile-journal-icons {
-  width: 150px;
-  height: 150px;
+  width: 125px;
+  height: 125px;
   border: 1.5px solid black;
   margin-right: 5px;
   flex-shrink: 0;

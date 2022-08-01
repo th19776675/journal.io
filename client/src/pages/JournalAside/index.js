@@ -3,8 +3,11 @@ import Leader from "../../components/Leader"
 import Button from "../../components/Button"
 import { useState, useEffect } from "react"
 import Auth from "../../utils/auth"
-import { getJournal } from "../../utils/API"
+import { getJournal, deleteJournal } from "../../utils/API"
 import "./journal-aside.css"
+
+import {PDFDownloadLink} from "@react-pdf/renderer";
+import JournalDoc from "../../components/JournalDoc";
 
 import { Link, useParams } from "react-router-dom"
 
@@ -25,11 +28,29 @@ const JournalAside = () => {
         throw new Error(message);      
       }
       const data = await response.json()
+      console.log(data)
       setJournalPages(data)
     } catch (e) {
       console.log(e)
     }
   }
+
+  const deleteJournalHandler = async () => {
+    const token = Auth.getToken()
+    try {
+      const response = await deleteJournal(token, journalId)
+      if (!response.ok) {
+        const { message } = await response.json();
+        throw new Error(message);      
+      }
+      const data = await response.json()
+      console.log(data)
+      location.reload(0)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+  
 
   useEffect(() => {
     getPageData()
@@ -63,6 +84,13 @@ const JournalAside = () => {
           </div>
         </div>
       </AsideCard>
+      <AsideCard height="auto">
+        <PDFDownloadLink document={journalPages ? <JournalDoc data={journalPages}/ > : <JournalDoc />} fileName={`${journalId}.pdf`}>
+        {({ blob, url, loading, error }) => (loading ? 'Loading document...' : (
+          <Button>Download Journal</Button>
+          ))}
+        </PDFDownloadLink>
+      </AsideCard>
       {journalPages.pages.map((page, index) => {
         return (
           <AsideCard>
@@ -89,6 +117,12 @@ const JournalAside = () => {
       {profileData.data.username === journalPages.authorName ? 
         <AsideCard height="auto">
          <Link to={`/journal/${journalPages._id}/publish`}><Button>Add Page</Button></Link> 
+        </AsideCard>:
+        ""
+    }
+      {profileData.data.username === journalPages.authorName ? 
+        <AsideCard height="auto">
+         <Link to={`/journals/user`}><Button onClick={deleteJournalHandler}>Delete Journal</Button></Link> 
         </AsideCard>:
         ""
     }

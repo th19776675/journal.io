@@ -4,7 +4,7 @@ import Leader from "../Leader";
 import "./text-editor.css"
 
 
-const TextEditor = ({textState, textHandler, placeholder}) => {
+const TextEditor = ({textState, textHandler, placeholder, toggleType}) => {
   const [plainSlider, setPlainSlider] = useState(false)
   
   const sliderClickHandler = () => {
@@ -20,7 +20,7 @@ const TextEditor = ({textState, textHandler, placeholder}) => {
       <>
         <div className="editor-wrapper">
           <Leader>
-          <p>Toggle Plain/Rich Editor</p>
+          <p>Toggle Plain/Rich {toggleType}</p>
           <Toggle checked={plainSlider} onClick={sliderClickHandler} />
           </Leader>
           <textarea name="plain" value={textState} onChange={textHandler} className="editor-area" placeholder={placeholder}></textarea>
@@ -31,12 +31,15 @@ const TextEditor = ({textState, textHandler, placeholder}) => {
   } 
   return(
     <>
-    <Leader>
-    <p>Toggle Plain/Rich Editor</p>
-    <Toggle checked={plainSlider} onClick={sliderClickHandler} />
-
-    </Leader>
-    
+      <div className="editor-wrapper">
+        <Leader>
+        <p>Toggle Plain/Rich {toggleType}</p>
+        <Toggle checked={plainSlider} onClick={sliderClickHandler} />
+        </Leader>
+        <div className="editor-placeholder">
+          <span>This feature is not implemented yet!</span>
+        </div>
+      </div>
   </>
   )
 }

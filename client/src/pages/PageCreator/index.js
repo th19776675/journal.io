@@ -45,7 +45,7 @@ const PageCreator = () => {
         <h3>0</h3>
       </Leader>
       <div className="daily-editor">
-        <TextEditor textState={plainText} textHandler={plainHandler} placeholder="Write an entry for your journal!"/>
+        <TextEditor textState={plainText} textHandler={plainHandler} toggleType="Editor" placeholder="Write an entry for your journal!"/>
       </div>
       <div className="page-creator-button">
         <Link to={`/journal/${journalId}`}>

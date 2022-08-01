@@ -58,7 +58,7 @@ const Profile = () => {
       </div>
       <Leader>
         <h3>Journals</h3>
-        <p>0</p>
+        <p>{currentUser ? currentUser.journals.length : ""}</p>
       </Leader>
       <div className="profile-journal-container">
         {currentUser ? currentUser.journals.map((journal) => (

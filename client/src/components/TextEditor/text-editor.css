@@ -14,3 +14,13 @@
 .editor-area:focus {
   outline: 1px solid black;
 }
+
+.editor-placeholder {
+  width: 100%;
+  flex-grow: 1;
+  border: 1.5px solid black;
+  background-color: rgb(238, 238, 238);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

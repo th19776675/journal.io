@@ -1,9 +1,29 @@
 .page-content {
   padding: 5px;
-  margin: 5px;
+  flex-grow: 1;
+  border: 1.5px black solid;
 }
 
 .page-buttons {
   display: flex;
   justify-content: space-around;
+  margin-top: 5px;
+}
+
+.page-full-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content-container {
+  flex-grow: 1;
+}
+
+.page-journal-links {
+  color: black;
+}
+
+.page-journal-links:hover {
+  opacity: 0.3;
 }

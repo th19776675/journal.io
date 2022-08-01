@@ -64,6 +64,7 @@ const DailyJournal = () => {
       }
       setDailyPlainText("")
       getDailyData()
+      lcoation.reload(0)
     } catch (e) {
       alert(e)
     }
@@ -87,7 +88,7 @@ const DailyJournal = () => {
         <h3>Daily</h3>
       </Leader>
       <div className="daily-editor">
-        <TextEditor textState={dailyPlainText} textHandler={dailyPlainHandler} placeholder="Write an entry for your daily journal!"/>
+        <TextEditor textState={dailyPlainText} textHandler={dailyPlainHandler} toggleType="Editor" placeholder="Write an entry for your daily journal!"/>
       </div>
       <button className="daily-button" onClick={clickPlainHandler}>Publish</button>
     </div>

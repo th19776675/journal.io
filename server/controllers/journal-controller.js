@@ -144,14 +144,14 @@ module.exports = {
         }
         res.json(page)
     },
-    async getAllPages () {
+    async getAllPages (req, res) {
         const pages = await Page.find();
         if (!pages) {
             return res.status(404).json({ message: 'Page could not be found!' });
         }
         res.json(pages.reverse())
     },
-    async addPage ({body, params}) {
+    async addPage ({body, params}, res) {
         const checkPage = Page.findById(params.pageId);
         if (!checkPage) {
             return res.status(404).json({ message: 'Page could not be found!' });

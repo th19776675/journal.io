@@ -14,6 +14,8 @@ import './user-profile.css'
 const UserProfile = () => {
   const {username} = useParams()
   const [userData, setUserData] = useState("");
+  const [responseMessage, setResponseMessage] = useState('');
+
 
   const getUserData = async () => {
     try {
@@ -41,9 +43,9 @@ const UserProfile = () => {
         const { message } = await response.json();
         throw new Error(message);      
       }
-      alert("Added a friend!")
+      setResponseMessage("Added a friend!")
     } catch (e) {
-    alert(e)
+    setResponseMessage(e)
     }
   }
 
@@ -103,6 +105,11 @@ const UserProfile = () => {
       <div className="profile-button-container">
         <Button onClick={addFriendHandler}>Add Friend</Button>
       </div>
+      {responseMessage && (
+          <div className="user-profile-text">
+            <p className="error-text">{responseMessage}</p>
+          </div>
+        )}
       <Leader>
         <p className="user-profile-footer">journ . al</p>
         <p className="user-profile-footer">v1.0</p>

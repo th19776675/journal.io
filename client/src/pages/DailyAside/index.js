@@ -6,6 +6,10 @@ import Auth from "../../utils/auth"
 import { getDailyPages } from "../../utils/API"
 import "./daily-aside.css"
 
+
+import {PDFDownloadLink} from "@react-pdf/renderer";
+import JournalDoc from "../../components/JournalDoc";
+
 import { Link } from "react-router-dom"
 
 
@@ -55,6 +59,13 @@ const DailyAside = () => {
             </p>
           </div>
         </div>
+      </AsideCard>
+      <AsideCard height="auto">
+        <PDFDownloadLink document={dailyJournalPages ? <JournalDoc data={dailyJournalPages}/ > : <JournalDoc />} fileName={`${dailyJournalPages._id}.pdf`}>
+        {({ blob, url, loading, error }) => (loading ? 'Loading document...' : (
+          <Button>Download Journal</Button>
+          ))}
+        </PDFDownloadLink>
       </AsideCard>
       {dailyJournalPages.pages.map((page, index) => {
         return (
